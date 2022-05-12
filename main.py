@@ -9,8 +9,6 @@ import datetime
 import os
 from scipy.io.wavfile import read as wavread
 
-# def rec2d()
-
 def wKA_FMCW(wavpath, v, start_offset, end_offset, out_img_path):
     '''
     - Modified from Kaiqi Chen's simulation code and code from 21class senior design SAR group.
@@ -31,8 +29,8 @@ def wKA_FMCW(wavpath, v, start_offset, end_offset, out_img_path):
     # print(now)
 
     path = wavpath
-    # [Aux_data, FS] = soundfile.read(path)
-    [FS, Aux_data] = wavread(path)
+    [Aux_data, FS] = soundfile.read(path)
+    # [FS, Aux_data] = wavread(path)
     V = float(v)
     Tp = 1/48.5/2 # pulse time - should be half of the period certainly used
 
@@ -195,8 +193,8 @@ def wKA_FMCW(wavpath, v, start_offset, end_offset, out_img_path):
 
 if __name__=='__main__':
     # (wav_path, velocity, start_offset, end_offset, img_path) = [
-    #     # './wav/sample.wav',
-
+    #     './wav/sample.wav',
+    #
     #     '2', '0', '0', './images']
     # wKA_FMCW(wav_path, velocity, start_offset, end_offset, img_path)
     try:
