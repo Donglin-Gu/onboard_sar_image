@@ -1,5 +1,5 @@
 import sys
-# import soundfile
+import soundfile
 from scipy.fftpack import fft, fftshift, ifft2
 from scipy.signal import hilbert
 import numpy as np
@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt
 import datetime
 import os
 from scipy.io.wavfile import read as wavread
+
+# def rec2d()
 
 def wKA_FMCW(wavpath, v, start_offset, end_offset, out_img_path):
     '''
@@ -174,38 +176,39 @@ def wKA_FMCW(wavpath, v, start_offset, end_offset, out_img_path):
 
     # offset image
 
-    test = np.empty(shape=trunc_image.shape)
-    trunc_image = np.flip(trunc_image, axis=0)
-    for i in range(trunc_image.shape[0]):
-        offset = -16.163 * np.exp(1.402 * (i / 1000 - 3)) - 75.795 # curve-fit parameters
-        test[i, :] = trunc_image[i, :] - np.ones(trunc_image.shape[1]) * offset
-    plt.figure()
-    plt.pcolormesh(crossrange, downrange, test, cmap='gray', vmin=test.max() - 25, vmax=test.max())
-    plt.colorbar()
-    plt.title("offset image")
-    plt.tight_layout()
-    plt.ylabel('Downrange')
-    plt.xlabel('Crossrange')
-    plt.show()
+    # test = np.empty(shape=trunc_image.shape)
+    # trunc_image = np.flip(trunc_image, axis=0)
+    # for i in range(trunc_image.shape[0]):
+    #     offset = -16.163 * np.exp(1.402 * (i / 1000 - 3)) - 75.795 # curve-fit parameters
+    #     test[i, :] = trunc_image[i, :] - np.ones(trunc_image.shape[1]) * offset
+    # plt.figure()
+    # plt.pcolormesh(crossrange, downrange, test, cmap='gray', vmin=test.max() - 25, vmax=test.max())
+    # plt.colorbar()
+    # plt.title("offset image")
+    # plt.tight_layout()
+    # plt.ylabel('Downrange')
+    # plt.xlabel('Crossrange')
+    # plt.show()
 
 
 
 
 if __name__=='__main__':
-    (wav_path, velocity, start_offset, end_offset, img_path) = [
-        './wav/sample.wav',
-        '2', '0', '0', './images']
-    wKA_FMCW(wav_path, velocity, start_offset, end_offset, img_path)
-    # try:
-    #     wav_path = sys.argv[1]
-    #     velocity = float(sys.argv[2])
-    #     start_offset = float(sys.argv[3])
-    #     end_offset = float(sys.argv[4])
-    #     img_path = sys.argv[5]
-    #     wKA_FMCW(wav_path, velocity, start_offset, end_offset, img_path)
-    # except Exception as e:
-    #     print("Input argvs are : {}".format(sys.argv))
-    #     print("Please check args: 'python main.py drone_velocity output_img_path start_offset end_offset'")
-    #     print(e)
+    # (wav_path, velocity, start_offset, end_offset, img_path) = [
+    #     # './wav/sample.wav',
+
+    #     '2', '0', '0', './images']
+    # wKA_FMCW(wav_path, velocity, start_offset, end_offset, img_path)
+    try:
+        wav_path = sys.argv[1]
+        velocity = float(sys.argv[2])
+        start_offset = float(sys.argv[3])
+        end_offset = float(sys.argv[4])
+        img_path = sys.argv[5]
+        wKA_FMCW(wav_path, velocity, start_offset, end_offset, img_path)
+    except Exception as e:
+        print("Input argvs are : {}".format(sys.argv))
+        print("Please check args: 'python main.py drone_velocity output_img_path start_offset end_offset'")
+        print(e)
 
 
